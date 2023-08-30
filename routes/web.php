@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\FileUploadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');
 
-Route::post('/fileupload', [App\Http\Controllers\FileUploadController::class, 'store'])->name('fileupload.store');
+Route::post('/fileupload', [FileUploadController::class, 'store'])->name('fileupload.store');

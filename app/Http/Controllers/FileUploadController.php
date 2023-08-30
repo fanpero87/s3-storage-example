@@ -3,14 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class FileUploadController extends Controller
 {
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
+        $image = $request->file('uploadedfile');
+        $fileName = 'uploaded' . '-' . Carbon::now()->format('d-m-Y');
+        $filePath = '/Images/' . $fileName;
 
-        $path = $request->file('uploadedfile')->store('fabioimage', 's3');
+        Storage::disk('s3')->put($filePath, $image);
 
-        return $path;
+        return redirect('/')->with('message', 'File uploded successfully!');
+        dd('message');
     }
 }
